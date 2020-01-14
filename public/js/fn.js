@@ -4,18 +4,19 @@ $(document).ready(function () {
 	var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
 	wsavc.connect(protocol + '//' + window.location.host + '/stream');
 	monitorTemp("airTemp");
+	monitorTemp("waterTemp");
 
 });
 
 
-function monitorTemp(tempTypeString) {
+function monitorTemp(tempString) {
 	setInterval(()=>{
 		$.ajax({
 			method: "get",
-			url: `/${tempTypeString}`,
+			url: `/${tempString}`,
 			success: function (res, status) {
-				#(`#${tempTypeString}`).html(`${res} F`);
+				$(`#${tempString}`).html(`${res.temp} F`);
 			}
 		})
-	})
+	}, 3000)
 }
