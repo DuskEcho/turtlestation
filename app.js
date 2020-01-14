@@ -3,6 +3,19 @@ const raspividStream = require('raspivid-stream');
 const app = express();
 const wss = require('express-ws')(app);
 const controller = require('./controllers/controller.js');
+const sensor = require('ds18b20-raspi');
+const temps = sensor.readAllC(2);
+console.log(temps);
+
+const dht = require('node-dht-sensor');
+dht.read(11, 4, (err, temp, hum) =>{
+  if (!err) {
+console.log(temp + " " + hum);
+  }
+	else{
+		console.log(err);}
+});
+
 
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || '8081');
@@ -20,7 +33,7 @@ app.ws('/stream', (ws, req) => {
     height: '540'
   }));
 
-    var videoStream = raspividStream({ rotation: 0 });
+    var videoStream = raspividStream();
     videoStream.on('data', (data) => {
         ws.send(data, { binary: true }, (error) => { if (error) console.log(error); });
     });
