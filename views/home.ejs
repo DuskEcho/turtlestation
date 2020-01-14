@@ -1,19 +1,11 @@
 <%- include('./partials/header.ejs') -%>
  <script type="text/javascript" src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script> 
-        <script>
-            var canvas = document.createElement("canvas");
-            document.body.appendChild(canvas);
 
-            var wsavc = new WSAvcPlayer(canvas, "webgl");
-
-            var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-            wsavc.connect(protocol + '//' + window.location.host + '/stream');
-        </script>
 	<div id='dashboard'>
 		Water Temp:  <span id='waterTemp'></span><t/>
 		Air Temp: <span id='airTemp'></span>
-	<input type='button' id='showPicBtn' value='Turtle Picture'/>
 	</div>
 	<div id='feed'>
+        <canvas id="liveFeed" width="960" height="540"></canvas>
 	</div>
 <%- include('./partials/footer.ejs') -%>
