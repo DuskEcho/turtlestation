@@ -1,7 +1,7 @@
 const express = require('express');
 const raspividStream = require('raspivid-stream');
-const wss = require('express-ws')(app);
 const app = express();
+const wss = require('express-ws')(app);
 const controller = require('./controllers/controller.js');
 
 app.set('view engine', 'ejs');
