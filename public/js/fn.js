@@ -1,17 +1,6 @@
-$(document).ready(function(){
-$("#feed").html("hi");
-console.log("HELLO");
-$("#showPicBtn").click(function(){
-$.ajax({
-	method: 'post',
-	url:'/api/showpic',
-	success: function(res, status){
-		console.log(res);
-		$("#feed").html(`<img src='/img/tempPic.jpg' alt='turtleCapture'/>`);
-		
-	}
-});
-});
-
-
+$(document).ready(function () {
+	var feed = document.getElementById("liveFeed");
+	var wsavc = new WSAvcPlayer(feed, "webgl");
+	var protocol = window.location.protocol === "https:" ? "wss:" : "ws:"
+	wsavc.connect(protocol + '//' + window.location.host + '/stream');
 });
