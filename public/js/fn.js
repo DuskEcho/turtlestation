@@ -6,6 +6,14 @@ $(document).ready(function () {
 	monitorTemp("airTemp");
 	monitorTemp("waterTemp");
 
+	$("#toggleIRButton").click(function(){
+	$.ajax({
+		method:'get',
+		url:'/toggleIR'	
+	})
+	
+	});
+
 });
 
 

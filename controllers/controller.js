@@ -2,8 +2,11 @@ const PiCamera = require('pi-camera');
 const picPath = `../public/img/tempPic.jpg`;
 const dht = require('node-dht-sensor');
 const ds18b20 = require('ds18b20-raspi');
-
 const raspividStream = require('raspivid-stream');
+const Gpio = require('onoff').Gpio;
+const IR = new Gpio(26, 'out');
+
+
 
 const cam = new PiCamera({
 	mode: 'photo',
@@ -14,9 +17,22 @@ const cam = new PiCamera({
 });
 
 module.exports = {
+
+	toggleIR: (req, res)=>{
+		console.log(req);
+		console.log('IR STATE IS ' + IR.readSync());
+		if (IR.readSync() ===0){
+			turnOnIR();
+		}
+		else{
+			turnOffIR();
+		}
+		res.send({status: "complete"});
+	},
+
 	showPic: async  (req, res)=>{
-	await cam.snap();
-  	res.sendfile(picPath);
+		await cam.snap();
+  		res.sendfile(picPath);
 	},
 
 	getAirTemp: (req, res)=>{
@@ -50,6 +66,7 @@ module.exports = {
 
 		ws.on('close', () => {
 			console.log('Later!');
+			turnOffIR();
 			videoStream.removeAllListeners('data');
 		});
 	},
@@ -66,10 +83,12 @@ module.exports = {
 			res.send({temp: waterTemp});
 		}
 	},
-
-	turnOnIR: () => {},
-	turnOffIR: () => {},
-
-
-
 };
+
+turnOnIR = ()=>{
+IR.writeSync(1);
+}
+turnOffIR = ()=>{
+IR.writeSync(0);
+}
+
