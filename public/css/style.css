@@ -1,18 +1,35 @@
-html{
-background-color: black;
+body {
+background-image: linear-gradient(to right, darkgray, dimgray, dimgray, darkgray, dimgray);
 color: white;
+}
+.tempArea{
+  font-family: "Lucida Console";
+  width: 15vw;
+  height: 10vw;
+  display: inline-block;
+  padding: 10px;
+  /*line-height:6;*/
+  font-size:20px;
+  border-style: groove;
+  border-color: silver;
+  border-width: 5px;
+  background-color: black;
+  color: chartreuse;
+  text-align: left;
+  margin: 0 10vw;
 }
 #dashboard{
-background-color: black;
-color: white;
 }
 #feed{
-background-color: black;
 }
 #liveFeed {
+ background-color: transparent;
  display: block;
  margin: 0 auto;
- background-color: black;
+ border-style: groove;
+ border-color: silver;
+ border-width: 4px;
+ overflow: none;
 }
 #dashboard{
 text-align: center;
