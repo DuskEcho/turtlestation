@@ -18,13 +18,16 @@ $(document).ready(function () {
 
 
 function monitorTemp(tempString) {
-	setInterval(()=>{
-		$.ajax({
-			method: "get",
-			url: `/${tempString}`,
-			success: function (res, status) {
-				$(`#${tempString}`).html(`${res.temp} F`);
-			}
-		})
-	}, 3000)
+	grabTemp(tempString);
+	setInterval(()=>{grabTemp(tempString);}, 10000);
+}
+
+function grabTemp(tempString) {
+$.ajax({
+		method: "get",
+		url: `/${tempString}`,
+		success: function (res, status) {
+			$(`#${tempString}`).html(`${res.temp} F`);
+		}
+	})
 }

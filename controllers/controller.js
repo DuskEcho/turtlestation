@@ -37,7 +37,7 @@ module.exports = {
 
 	getAirTemp: (req, res)=>{
 		console.log("Querying DHT11...")
-		dht.read(11, 4, (err, temp, hum) =>{
+		dht.read(11, 17, (err, temp, hum) =>{
 			if (!err) {
 				fTemp = temp*(9/5)+32;
 				console.log(`Query successful.  Temp was ${fTemp} and humidity was ${hum}`);
@@ -80,7 +80,7 @@ module.exports = {
 		}
 		else{
 			console.log(`Query successful. Water Temp was ${fTemp}`);
-			res.send({temp: waterTemp});
+			res.send({temp: fTemp});
 		}
 	},
 };
