@@ -1,3 +1,10 @@
+/*
+Many thanks to:
+https://github.com/matijagaspar/ws-avc-player
+https://www.npmjs.com/package/raspivid-stream
+ */
+
+
 $(document).ready(function () {
 	var feed = document.getElementById("liveFeed");
 	var wsavc = new WSAvcPlayer(feed, "webgl");
@@ -7,13 +14,11 @@ $(document).ready(function () {
 	monitorTemp("waterTemp");
 
 	$("#toggleIRButton").click(function(){
-	$.ajax({
-		method:'get',
-		url:'/toggleIR'	
-	})
-	
+		$.ajax({
+			method:'get',
+			url:'/toggleIR'
+		})
 	});
-
 });
 
 

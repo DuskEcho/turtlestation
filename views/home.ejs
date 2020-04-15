@@ -1,16 +1,16 @@
 <%- include('./partials/header.ejs') -%>
- <script type="text/javascript" src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script> 
+ <script type="text/javascript" src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script>
 
 	<div id='dashboard'>
-		<div class='tempArea'>
+		<div class='tempArea water'>
 			Water Temp:  <span id='waterTemp'></span><t/>
 		</div>
-		<div class='tempArea'>
+		<div class='tempArea air'>
 			Air Temp: <span id='airTemp'></span>
 		</div>
 	</div>
 	<div id='controls'>
-		<button id='toggleIRButton'>Toggle Light</button>
+		<button id='toggleIRButton'  type="button" class="btn btn-outline-light">Toggle Light</button>
 	</div>
 	<div id='feed'>
         <canvas id="liveFeed" width="960" height="540"></canvas>
