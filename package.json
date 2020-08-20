@@ -10,7 +10,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@clusterws/cws": "^1.1.1",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "clusterws": "^3.3.1",
     "cws": "^1.2.9",
     "ds18b20-raspi": "^0.3.4",
