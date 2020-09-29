@@ -17,7 +17,7 @@ const cam = new PiCamera({
 });
 
 function readDHT(){
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		dht.read(11, 17, (err, temp, hum) =>{
 			if (!err) {
 				fTemp = temp*(9/5)+32;
@@ -33,7 +33,7 @@ function readDHT(){
 }
 
 function readDS18B20(){
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		let fTemp = ds18b20.readSimpleF();
 		if (!fTemp){
 			console.log("Water Temp query failed.");
