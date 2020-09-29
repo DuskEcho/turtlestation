@@ -1,18 +1,34 @@
 <%- include('./partials/header.ejs') -%>
- <script type="text/javascript" src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script>
+<script type="text/javascript"
+        src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">TurtleStation</a>
+		<div id='dashboard'>
+			<div id="temps">
+				<div class='tempArea water'>
+					Water Temp:
+					<div id='waterTemp'></div>
+				</div>
+				<div class='tempArea air'>
+					Air Temp:
+					<div id='airTemp'></div>
+				</div>
+			</div>
+		</div>
+		<div id='controls'>
+			<button id='toggleIRButton' type="button" class="btn btn-outline-light">Toggle Light</button>
+			<button id='feedButton' type="button" class="btn btn-outline-light">Feed</button>
+		</div>
 
-	<div id='dashboard'>
-		<div class='tempArea water'>
-			Water Temp:  <span id='waterTemp'></span><t/>
-		</div>
-		<div class='tempArea air'>
-			Air Temp: <span id='airTemp'></span>
-		</div>
-	</div>
-	<div id='controls'>
-		<button id='toggleIRButton'  type="button" class="btn btn-outline-light">Toggle Light</button>
-	</div>
-	<div id='feed'>
-        <canvas id="liveFeed" width="960" height="540"></canvas>
-	</div>
+    </div>
+</nav>
+
+<div id='feed'>
+    <canvas id="liveFeed" width="960" height="540"></canvas>
+</div>
 <%- include('./partials/footer.ejs') -%>
