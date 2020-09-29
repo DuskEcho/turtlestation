@@ -16,7 +16,7 @@ const cam = new PiCamera({
 	nopreview: true
 });
 
-function readDHT(){
+async function readDHT(){
 	return new Promise((resolve, reject) => {
 		dht.read(11, 17, (err, temp, hum) =>{
 			if (!err) {
@@ -67,7 +67,7 @@ module.exports = {
 
 	getAirTemp: (req, res)=>{
 		console.log("Querying DHT11...")
-		readDHT.then((temp)=>res.send(temp));
+		readDHT().then((temp)=>res.send(temp));
 	},
 
 	getLiveFeed: (ws, req) => {
