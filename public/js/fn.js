@@ -34,7 +34,7 @@ async function monitorTemp(tempString) {
     grabTemp(tempString);
     setInterval(() => {
         grabTemp(tempString);
-    }, 2000);
+    }, 10000);
 }
 
 function grabTemp(tempString) {
@@ -43,7 +43,6 @@ function grabTemp(tempString) {
         method: "get",
         url: `/${tempString}`,
         success: function (res, status) {
-
         	let numerator = res.temp - tempBars[tempString].min;
         	let denominator = tempBars[tempString].max - tempBars[tempString].min;
         	let percent = (numerator/denominator) * 100;
