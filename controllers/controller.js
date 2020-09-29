@@ -16,6 +16,36 @@ const cam = new PiCamera({
 	nopreview: true
 });
 
+async function readDHT(){
+	return new Promise((resolve, reject) => {
+		dht.read(11, 17, (err, temp, hum) =>{
+			if (!err) {
+				fTemp = temp*(9/5)+32;
+				console.log(`Query successful.  Temp was ${fTemp} and humidity was ${hum}`);
+				resolve({temp: fTemp});
+			}
+			else{
+				console.log(`Air Temp query failed: ${err}`);
+				resolve({temp: -1});
+			}
+		});
+	})
+}
+
+function readDS18B20(){
+	return new Promise((resolve, reject) => {
+		let fTemp = ds18b20.readSimpleF();
+		if (!fTemp){
+			console.log("Water Temp query failed.");
+			resolve({temp: -1});
+		}
+		else{
+			console.log(`Query successful. Water Temp was ${fTemp}`);
+			resolve({temp: fTemp});
+		}
+	})
+}
+
 module.exports = {
 
 	toggleIR: (req, res)=>{
@@ -37,18 +67,7 @@ module.exports = {
 
 	getAirTemp: (req, res)=>{
 		console.log("Querying DHT11...")
-		dht.read(11, 17, (err, temp, hum) =>{
-			if (!err) {
-				fTemp = temp*(9/5)+32;
-				console.log(`Query successful.  Temp was ${fTemp} and humidity was ${hum}`);
-				res.send({temp: fTemp});
-			}
-			else{
-				console.log(`Air Temp query failed: ${err}`);
-				res.send({temp: -1});
-			}
-		});
-
+		readDHT().then((temp)=>res.send(temp));
 	},
 
 	getLiveFeed: (ws, req) => {
@@ -63,7 +82,6 @@ module.exports = {
 		videoStream.on('data', (data) => {
 		ws.send(data, { binary: true }, (error) => { if (error) console.log(error); });
 		});
-
 		ws.on('close', () => {
 			console.log('Later!');
 			turnOffIR();
@@ -73,16 +91,11 @@ module.exports = {
 
 	getWaterTemp: (req, res) => {
 		console.log("Querying water temp...");
-		let fTemp = ds18b20.readSimpleF();
-		if (!fTemp){
-			console.log("Water Temp query failed.");
-			res.send({temp: -1});
-		}
-		else{
-			console.log(`Query successful. Water Temp was ${fTemp}`);
-			res.send({temp: fTemp});
-		}
+		readDS18B20().then((temp)=>res.send(temp));
 	},
+
+
+
 };
 
 turnOnIR = ()=>{
