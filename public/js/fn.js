@@ -58,15 +58,10 @@ function grabTemp(tempString) {
         	else{
         		color = "bg-danger";
 			}
-        	console.log(percent);
-        	console.log(res.temp);
-			console.log(tempBars[tempString].min)
-			console.log(tempBars[tempString].max)
-			console.log(color)
 
             $(`#${tempString}`).html(`
 			<div class="progress">
-  				<div class="progress-bar ${color}" style="width: ${percent}%; transition: width .5s;" role="progressbar" aria-valuenow="${res.temp}" aria-valuemin="${tempBars[tempString].min}" aria-valuemax="${tempBars[tempString].max}"></div>
+  				<div class="progress-bar ${color}" style="width: ${percent}%;" role="progressbar" aria-valuenow="${res.temp}" aria-valuemin="${tempBars[tempString].min}" aria-valuemax="${tempBars[tempString].max}"></div>
 			</div>
 			 `);
         }
