@@ -5,8 +5,8 @@ https://www.npmjs.com/package/raspivid-stream
  */
 const tempBars = {
 	'airTemp': {
-		min: 80,
-		max: 105
+		min: 70,
+		max: 115
 	},
 	'waterTemp':{
 		min: 67,
@@ -66,7 +66,7 @@ function grabTemp(tempString) {
 
             $(`#${tempString}`).html(`
 			<div class="progress">
-  				<div class="progress-bar ${color}" style="width: ${percent}%" role="progressbar" aria-valuenow="${res.temp}" aria-valuemin="${tempBars[tempString].min}" aria-valuemax="${tempBars[tempString].max}"></div>
+  				<div class="progress-bar ${color}" style="width: ${percent}%; transition: width .5s;" role="progressbar" aria-valuenow="${res.temp}" aria-valuemin="${tempBars[tempString].min}" aria-valuemax="${tempBars[tempString].max}"></div>
 			</div>
 			 `);
         }
