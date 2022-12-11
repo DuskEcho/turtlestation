@@ -15,7 +15,7 @@
     "cws": "^1.2.9",
     "ds18b20-raspi": "^0.3.4",
     "ejs": "^2.7.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.0",
     "express-ws": "^4.0.0",
     "forever": "^2.0.0",
